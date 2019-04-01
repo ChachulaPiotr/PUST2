@@ -1,5 +1,5 @@
 clear variables
-close all
+%close all
 
 % zmienne i macierze regulatora
 load('odp_skoks')
@@ -61,11 +61,14 @@ start = 10;
 
 U = U0*ones(1,n);
 Z = Z0*ones(1,n);
-Z(400:end) = 1;
+for i = 1:n
+    Z(i) = sin(i/10)*0;
+end
 Y = Y0*ones(1,n);
 Yz = Y;
 Yz(10:end) = 1;
 e = zeros(1,n);
+load('noise.mat')
 
 hold on
 for k = start:n
@@ -76,7 +79,7 @@ for k = start:n
     for i = DZ:-1:2
        deltazp(i) = deltazp(i-1);
     end
-    deltazp(1) = Z(k) - Z(k-1);
+    deltazp(1) = Z(k) - Z(k-1)+noise(k);
 
     % Prawo regulacji
     deltauk = ke*e(k)-ku*deltaup'-kz*deltazp';
@@ -87,15 +90,11 @@ for k = start:n
     deltaup(1) = deltauk;
     U(k) = U(k-1)+deltaup(1);
 end
-Err = (Yz-Y)*(Yz-Y)';
-subplot(2,1,1);
+
 plot(Yz, 'r')
 hold on
 plot(Y, 'b')
-title('Error='+string(Err));
-xlabel('k')
-ylabel('Y(k), (k)');
-subplot(2,1,2);
-plot(U)
-hold on
-plot(Z)
+% figure
+% plot(U)
+% hold on
+% plot(Z)

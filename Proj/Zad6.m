@@ -61,7 +61,9 @@ start = 10;
 
 U = U0*ones(1,n);
 Z = Z0*ones(1,n);
-Z(400:end) = 1;
+for i = 1:n
+    Z(i) = sin(i/10)/10;
+end
 Y = Y0*ones(1,n);
 Yz = Y;
 Yz(10:end) = 1;
@@ -87,15 +89,11 @@ for k = start:n
     deltaup(1) = deltauk;
     U(k) = U(k-1)+deltaup(1);
 end
-Err = (Yz-Y)*(Yz-Y)';
-subplot(2,1,1);
+
 plot(Yz, 'r')
 hold on
 plot(Y, 'b')
-title('Error='+string(Err));
-xlabel('k')
-ylabel('Y(k), (k)');
-subplot(2,1,2);
-plot(U)
-hold on
-plot(Z)
+% figure
+% plot(U)
+% hold on
+% plot(Z)
