@@ -1,13 +1,17 @@
-function [Err] = DMC_Z (paras)
+function [Err] = DMC_Z ()
     % zmienne i macierze regulatora
     load('odp_skoks');
     s = su;
     z = sz;
     D=116;
-    N=paras(1);
-    Nu=paras(2);
-    lambda = paras(3);
-    DZ = 36;
+%     N=paras(1);
+%     Nu=paras(2);
+%     lambda = paras(3);
+%    DZ = 36;
+    N = 116;
+    Nu = 4;
+    lambda = 1;
+    DZ = 25;
     
     M=zeros(N,Nu);
     for i=1:N
@@ -30,16 +34,16 @@ function [Err] = DMC_Z (paras)
     end
 
     MZP=zeros(N,DZ);
-%     for i=1:N
-%         MZP(i,1) = z(i);
-%        for j=2:DZ
-%           if i+j-1<=DZ
-%              MZP(i,j)=z(i+j-1)-z(j);
-%           else
-%              MZP(i,j)=z(DZ)-z(j);
-%           end      
-%        end
-%     end
+    for i=1:N
+        MZP(i,1) = z(i);
+       for j=2:DZ
+          if i+j-1<=DZ
+             MZP(i,j)=z(i+j-1)-z(j);
+          else
+             MZP(i,j)=z(DZ)-z(j);
+          end      
+       end
+    end
 
     I=eye(Nu);
     K=((M'*M+lambda*I)^-1)*M';
@@ -50,7 +54,7 @@ function [Err] = DMC_Z (paras)
     deltazp=zeros(1,DZ-1);
 
     % dane
-    n = 1000;
+    n = 200;
     tau = 7;
     U0 = 0;
     Z0 = 0;
@@ -59,14 +63,15 @@ function [Err] = DMC_Z (paras)
 
     U = U0*ones(1,n);
     Z = Z0*ones(1,n);
-    %Z(400:end) = 1;
+    Z(100:end) = 1;
     Y = Y0*ones(1,n);
     Yz = Y;
-    Yz(10:200) = 1;
-    Yz(201:400) = 0.5;
-    Yz(401:600) = 1.5;
-    Yz(601:800) = 0;
-    Yz(801:end) = 0.5;
+    Yz(10:end) = 1;
+%     Yz(10:200) = 1;
+%     Yz(201:400) = 0.5;
+%     Yz(401:600) = 1.5;
+%     Yz(601:800) = 0;
+%     Yz(801:end) = 0.5;
     e = zeros(1,n);
 
     %hold on
