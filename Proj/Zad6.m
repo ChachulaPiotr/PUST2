@@ -6,10 +6,10 @@ load('odp_skoks')
 s = su;
 z = sz;
 D=116;
-N=D;
-Nu=D;
-DZ = 36;
-lambda = 10;
+N=116;
+Nu=4;
+DZ = 25;
+lambda = 1;
 
 M=zeros(N,Nu);
 for i=1:N
@@ -50,6 +50,7 @@ kz=K(1,:)*MZP;
 ke=sum(K(1,:));
 deltaup=zeros(1,D-1);
 deltazp=zeros(1,DZ-1);
+deltaup_bez = deltaup;
 
 % dane
 n = 1000;
@@ -60,19 +61,24 @@ Y0 = 0;
 start = 10;
 
 U = U0*ones(1,n);
+U_bez = U;
 Z = Z0*ones(1,n);
 for i = 1:n
-    Z(i) = sin(i/10)/10;
+    Z(i) = sin(i/20)/2;
 end
 Y = Y0*ones(1,n);
+Y_bez=Y;
 Yz = Y;
 Yz(10:end) = 1;
 e = zeros(1,n);
+e_bez = e;
 
 hold on
 for k = start:n
     Y(k) = symulacja_obiektu4y(U(k-6),U(k-7),Z(k-2),Z(k-3),Y(k-1),Y(k-2));
+    Y_bez(k)=symulacja_obiektu4y(U_bez(k-6),U_bez(k-7),Z(k-2),Z(k-3),Y_bez(k-1),Y_bez(k-2));
     e(k) = Yz(k) - Y(k);
+    e_bez(k) = Yz(k)-Y_bez(k);
     
     %uwzglêdnianie zak³ócenia
     for i = DZ:-1:2
@@ -82,18 +88,23 @@ for k = start:n
 
     % Prawo regulacji
     deltauk = ke*e(k)-ku*deltaup'-kz*deltazp';
+    deltauk_bez = ke*e_bez(k)-ku*deltaup_bez';
 
     for i = D-1:-1:2
       deltaup(i) = deltaup(i-1);
+      deltaup_bez(i) = deltaup_bez(i-1);
     end
     deltaup(1) = deltauk;
+    deltaup_bez(1) = deltauk_bez;
     U(k) = U(k-1)+deltaup(1);
+    U_bez(k) = U_bez(k-1)+deltaup_bez(1);
 end
-
-plot(Yz, 'r')
+Err = (Yz-Y)*(Yz-Y)';
+plot(Yz, 'r--')
 hold on
 plot(Y, 'b')
-% figure
-% plot(U)
-% hold on
-% plot(Z)
+plot(Y_bez, 'g')
+title('Error='+string(Err));
+xlabel('k')
+ylabel('Y(k), Yzad(k), Y_bez(k)');
+legend('Yzad','Y','Y bez uwzgledniania zaklocenia')

@@ -1,17 +1,19 @@
 function [Err] = DMC_Z ()
     % zmienne i macierze regulatora
-    load('odp_skoks');
-    s = su;
-    z = sz;
-    D=116;
-%     N=paras(1);
-%     Nu=paras(2);
-%     lambda = paras(3);
-%    DZ = 36;
+    load('odp_skok');
+%     D=paras(1);
+%     N = paras(2);
+%     Nu=paras(3);
+%     lambda = paras(4);
+    D = 116;
     N = 116;
     Nu = 4;
     lambda = 1;
     DZ = 25;
+    s = su;
+    z = zeros(N,1);
+    z(1:size(sz))=sz;
+    z(size(sz):end)=sz(end);
     
     M=zeros(N,Nu);
     for i=1:N
@@ -34,16 +36,16 @@ function [Err] = DMC_Z ()
     end
 
     MZP=zeros(N,DZ);
-    for i=1:N
-        MZP(i,1) = z(i);
-       for j=2:DZ
-          if i+j-1<=DZ
-             MZP(i,j)=z(i+j-1)-z(j);
-          else
-             MZP(i,j)=z(DZ)-z(j);
-          end      
-       end
-    end
+%     for i=1:N
+%         MZP(i,1) = z(i);
+%        for j=2:DZ
+%           if i+j-1<=DZ
+%              MZP(i,j)=z(i+j-1)-z(j);
+%           else
+%              MZP(i,j)=z(DZ)-z(j);
+%           end      
+%        end
+%     end
 
     I=eye(Nu);
     K=((M'*M+lambda*I)^-1)*M';
