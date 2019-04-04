@@ -1,0 +1,30 @@
+\chapter{Pomiar w punkcie pracy}
+\section{Komunikacja z obiektem}
+Komunikacja z obiektem odbywa się za pomocą funkcji napisanych w środowisku MatLab. Najprostszy program prezentujący sposób ich użycia znajduje się poniżej.
+%\begin{lstlisting}[style=custommatlab,frame=single]
+\begin{lstlisting}[style=custommatlab]
+
+addpath('F:\SerialCommunication'); % add a path to the functions
+initSerialControl COM3 % initialise com port
+N = 360;
+i = 0;
+while(i<=N)
+	%% obtaining measurements
+	measurements = readMeasurements(1:7); 
+	
+	%% processing of the measurements
+	disp(measurements(1));
+	
+	%% sending new values of control signals
+	sendControlsToG1AndDisturbance(29,10);
+	
+	i=i+1;
+	% wait for new batch of measurements to be ready
+	waitForNewIteration();
+end
+\end{lstlisting} 
+W tym zadaniu uzywamy funkcji sendControlsToG1AndDisturbance, która pozwala wysyłać sterowanie na grzałkę pierwszą oraz wartość zakłóczenia. Funkcja oraz cały skrypt działą poprawnie.
+\section{Punkt pracy}
+Sygnałem sterującym jest moc grzania pierwszą grzałką, natomiast zakłóceniem jest nieznanym wzmocnieniem tej grzałki. Pierwszy wentylator (1 element sterowalny) ma być na stałe ustawiony na 50\% (cecha otoczenia), a pozostałe elementy mają pozostać wyłączone. Wyjsciem ma być temperatura zmierzona przez czujnik temperatury T1.
+Wartoscią sygnału sterującego w naszym punkcie pracy ma być 29\%, natomiast wartość zakłóceń ma być równa 0.
+Ustabilizowana wartość wyjścia obiektu  odpowiada temperaturze na T1 równej \num{32.75}. Warto zwrócić uwagę na to, iż znacząco się ona różni (o około dwa stopnie) w stosunku do analogicznego punktu pracy w pierwszym zadaniu. Wpływ na to mają nieuwzględniane zakłócenia, jak np. temperatura powietrza w sali.
