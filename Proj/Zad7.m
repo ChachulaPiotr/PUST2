@@ -79,7 +79,7 @@ for k = start:n
     for i = DZ:-1:2
        deltazp(i) = deltazp(i-1);
     end
-    deltazp(1) = Z(k) - Z(k-1)+noise(k);
+    deltazp(1) = Z(k) - Z(k-1)+wgn(1,1,-10000000);
 
     % Prawo regulacji
     deltauk = ke*e(k)-ku*deltaup'-kz*deltazp';
@@ -90,11 +90,11 @@ for k = start:n
     deltaup(1) = deltauk;
     U(k) = U(k-1)+deltaup(1);
 end
-
-plot(Yz, 'r')
+Err = (Yz-Y)*(Yz-Y)';
+plot(Yz, 'r--')
 hold on
 plot(Y, 'b')
-% figure
-% plot(U)
-% hold on
-% plot(Z)
+title('Error='+string(Err));
+xlabel('k')
+ylabel('Y(k), Yzad(k)');
+legend('Yzad','Y')

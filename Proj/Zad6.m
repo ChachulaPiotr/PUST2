@@ -64,12 +64,17 @@ U = U0*ones(1,n);
 U_bez = U;
 Z = Z0*ones(1,n);
 for i = 1:n
-    Z(i) = sin(i/20)/2;
+    Z(i) = sin(i/20)/10;
 end
 Y = Y0*ones(1,n);
 Y_bez=Y;
 Yz = Y;
 Yz(10:end) = 1;
+Yz(10:200) = 1;
+Yz(201:400) = 0.5;
+Yz(401:600) = 1.5;
+Yz(601:800) = 0;
+Yz(801:end) = 0.5;
 e = zeros(1,n);
 e_bez = e;
 
@@ -100,11 +105,12 @@ for k = start:n
     U_bez(k) = U_bez(k-1)+deltaup_bez(1);
 end
 Err = (Yz-Y)*(Yz-Y)';
+Err_bez = (Yz-Y_bez)*(Yz-Y_bez)';
 plot(Yz, 'r--')
 hold on
 plot(Y, 'b')
 plot(Y_bez, 'g')
-title('Error='+string(Err));
+title('     Zaklocenie uwzglednianie: Error='+string(Err)+'\newline'+'Zaklocenie nie uwzgledniane: Error='+string(Err_bez));
 xlabel('k')
 ylabel('Y(k), Yzad(k), Y_bez(k)');
 legend('Yzad','Y','Y bez uwzgledniania zaklocenia')

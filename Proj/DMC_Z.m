@@ -1,14 +1,10 @@
-function [Err] = DMC_Z ()
+function [Err] = DMC_Z (paras)
     % zmienne i macierze regulatora
     load('odp_skok');
-%     D=paras(1);
-%     N = paras(2);
-%     Nu=paras(3);
-%     lambda = paras(4);
-    D = 116;
-    N = 116;
-    Nu = 4;
-    lambda = 1;
+    D=paras(1);
+    N = paras(2);
+    Nu=paras(3);
+    lambda = paras(4);
     DZ = 25;
     s = su;
     z = zeros(N,1);
