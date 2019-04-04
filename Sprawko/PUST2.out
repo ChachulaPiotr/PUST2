@@ -14,4 +14,27 @@
 \BOOKMARK [1][-]{section.5.1}{Dob\363r parametru Dz}{chapter.5}% 14
 \BOOKMARK [1][-]{section.5.2}{Om\363wienie wynik\363w}{chapter.5}% 15
 \BOOKMARK [0][-]{chapter.6}{Zakl\363cenie sinusoidalne}{part.1}% 16
-\BOOKMARK [-1][-]{part.2}{Laboratoria}{}% 17
+\BOOKMARK [0][-]{chapter.7}{Szum pomiarowy}{part.1}% 17
+\BOOKMARK [1][-]{subsection.7.0.1}{Realizacja w Matlabie}{chapter.7}% 18
+\BOOKMARK [2][-]{subsection.7.0.2}{Wyniki}{subsection.7.0.1}% 19
+\BOOKMARK [2][-]{subsection.7.0.3}{Om\363wienie wynik\363w}{subsection.7.0.1}% 20
+\BOOKMARK [-1][-]{part.2}{Laboratoria}{}% 21
+\BOOKMARK [0][-]{chapter.8}{Pomiar w punkcie pracy}{part.2}% 22
+\BOOKMARK [1][-]{section.8.1}{Komunikacja z obiektem}{chapter.8}% 23
+\BOOKMARK [1][-]{section.8.2}{Punkt pracy}{chapter.8}% 24
+\BOOKMARK [0][-]{chapter.9}{Odpowiedzi skokowe}{part.2}% 25
+\BOOKMARK [1][-]{section.9.1}{Wykresy odpowiedzi skokowych}{chapter.9}% 26
+\BOOKMARK [1][-]{section.9.2}{Wzmocnienie statyczne}{chapter.9}% 27
+\BOOKMARK [0][-]{chapter.10}{Normalizacja odpowiedzi skokowych}{part.2}% 28
+\BOOKMARK [1][-]{section.10.1}{Znormalizowane odpowiedzi}{chapter.10}% 29
+\BOOKMARK [1][-]{section.10.2}{Aproksymacja odpowiedzi skokowych}{chapter.10}% 30
+\BOOKMARK [0][-]{chapter.11}{Regulator DMC z pomiarem zakl\363cen}{part.2}% 31
+\BOOKMARK [1][-]{section.11.1}{Implementacja}{chapter.11}% 32
+\BOOKMARK [1][-]{section.11.2}{Strojenie regulatora DMC}{chapter.11}% 33
+\BOOKMARK [2][-]{subsection.11.2.1}{Badanie parametru }{section.11.2}% 34
+\BOOKMARK [2][-]{subsection.11.2.2}{Badanie parametr\363w N i Nu}{section.11.2}% 35
+\BOOKMARK [0][-]{chapter.12}{Symulacja z zakl\363ceniem}{part.2}% 36
+\BOOKMARK [1][-]{section.12.1}{Dobranie parametru Dz}{chapter.12}% 37
+\BOOKMARK [1][-]{section.12.2}{Symulacja z pomiarem zakl\363cen}{chapter.12}% 38
+\BOOKMARK [1][-]{section.12.3}{Symulacja bez pomiaru zakl\363cen}{chapter.12}% 39
+\BOOKMARK [1][-]{section.12.4}{Wnioski}{chapter.12}% 40
